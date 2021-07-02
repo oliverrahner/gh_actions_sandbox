@@ -1,0 +1,34 @@
+name: CI/CD
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  build:
+    name: Build and Deploy
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: determine target path
+        run: |
+          [[ "$GITHUB_REF" = "refs/heads/main" ]] && \
+            TARGET_PATH=
+          || \
+            TARGET_PATH=_branches/${GITHUB_REF#refs/heads/}/ " \
+          echo "target_path=$TARGET_PATH" >> $GITHUB_ENV \
+          echo "target_url=https://docs.my.agrirouter.com/$target_path" \
+          grep target_path $GITHUB_ENV
+
+      - uses: mshick/add-pr-comment@v1
+        with:
+          message: |
+            The content of this PR can be reviewed at
+            🌏 ${{ env.target_url }}
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          repo-token-user-login:
+          allow-repeats: false
