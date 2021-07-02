@@ -16,7 +16,7 @@ jobs:
 
       - name: determine target path
         run: |
-          echo GITHUB_REF is $GITHUB_REF; \
+          echo "GITHUB_REF is $GITHUB_REF"; \
           ([[ "$GITHUB_REF" = "refs/heads/main" ]] && \
             TARGET_PATH= \
           || \
