@@ -17,6 +17,7 @@ jobs:
       - name: determine target path
         run: |
           echo "GITHUB_REF is $GITHUB_REF";
+          echo "PR number is ${{github.event.issue.number}}";
           if [ "$GITHUB_REF" = "refs/heads/main" ]; then
             TARGET_PATH=
           else
