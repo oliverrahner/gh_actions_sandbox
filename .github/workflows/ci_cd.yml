@@ -20,7 +20,7 @@ jobs:
           ([[ "$GITHUB_REF" = "refs/heads/main" ]] && \
             TARGET_PATH= \
           || \
-            TARGET_PATH=_branches/${GITHUB_REF#refs/heads/}/ ; \
+            TARGET_PATH=_branches/${GITHUB_REF#refs/heads/}/ ); \
           echo "target_path=$TARGET_PATH" >> $GITHUB_ENV; \
           echo "target_url=https://docs.my.agrirouter.com/$target_path" >> $GITHUB_ENV; \
           grep target_path $GITHUB_ENV; \
